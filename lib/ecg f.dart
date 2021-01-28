@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:yata_p1/widgets/custom_check_box_one.dart';
+import 'package:yata_p1/widgets/dyspne_check_list.dart';
 
 class FEGCInterPage extends StatefulWidget {
   final bool isVisiting;
@@ -40,8 +42,7 @@ class FEGCInterPage extends StatefulWidget {
   State<StatefulWidget> createState() => _FEGCInterPageState();
 }
 
-class _FEGCInterPageState extends State<FEGCInterPage>
-    with AutomaticKeepAliveClientMixin {
+class _FEGCInterPageState extends State<FEGCInterPage> with AutomaticKeepAliveClientMixin {
   String _sexe = 'Masculin';
 
   TextEditingController codeAdminC = new TextEditingController();
@@ -57,25 +58,13 @@ class _FEGCInterPageState extends State<FEGCInterPage>
 
   // CHECKBOXES DATA
   List<bool> frcv = [false, false, false, false, false];
-  List<String> frcvTexts = [
-    "HTA",
-    "Diabète",
-    "Tabac",
-    "Obésité",
-    "Dyslpidémie"
-  ];
+  List<String> frcvTexts = ["HTA", "Diabète", "Tabac", "Obésité", "Dyslpidémie"];
 
   List<bool> dyspne = [false, false, false, false];
   List<String> dyspneTexts = ["Stade 1", "Stade 2", "Stade 3", "Stade 4"];
 
   List<bool> douleur = [false, false, false, false, false];
-  List<String> douleurTexts = [
-    "Rétro Stérnal",
-    "basi-thoracique",
-    "Hépatalgie d'effort",
-    "médio-thoracique",
-    "Atypique"
-  ];
+  List<String> douleurTexts = ["Rétro Stérnal", "basi-thoracique", "Hépatalgie d'effort", "médio-thoracique", "Atypique"];
 
   // YES / NO CHECKBOXES
   bool palpit = false;
@@ -143,52 +132,35 @@ class _FEGCInterPageState extends State<FEGCInterPage>
                                 width: size.width - 20,
                                 child: SingleChildScrollView(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: <Widget>[
                                       Container(
                                         color: Color(0xFF000043),
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 0, horizontal: 8),
+                                        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
                                         child: Row(
-                                          mainAxisAlignment: widget.id == null
-                                              ? MainAxisAlignment.spaceBetween
-                                              : MainAxisAlignment.start,
+                                          mainAxisAlignment: widget.id == null ? MainAxisAlignment.spaceBetween : MainAxisAlignment.start,
                                           children: <Widget>[
                                             IconButton(
-                                              icon: Icon(CupertinoIcons.back,
-                                                  size: size.width / 20,
-                                                  color: Colors.white),
+                                              icon: Icon(CupertinoIcons.back, size: size.width / 20, color: Colors.white),
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
                                             ),
                                             Text(
                                               "  Formulaire ECG",
-                                              style: TextStyle(
-                                                  color: Color(0xFFFFFFFF),
-                                                  fontSize: size.width / 27.5,
-                                                  fontWeight: FontWeight.bold),
+                                              style: TextStyle(color: Color(0xFFFFFFFF), fontSize: size.width / 27.5, fontWeight: FontWeight.bold),
                                             ),
                                           ],
                                         ),
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: <Widget>[
-                                          Image.asset(
-                                              'assets/images/services/ecg.png',
-                                              width: size.width / 4),
+                                          Image.asset('assets/images/services/ecg.png', width: size.width / 4),
                                           Text(
-                                            " LECTURE\n électrocardiogramme"
-                                                .toUpperCase(),
+                                            " LECTURE\n électrocardiogramme".toUpperCase(),
                                             textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                fontFamily: 'bern',
-                                                fontSize: 22,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color(0xFF000043)),
+                                            style: TextStyle(fontFamily: 'bern', fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF000043)),
                                           ),
                                           SizedBox(
                                             width: size.width / 15,
@@ -196,11 +168,9 @@ class _FEGCInterPageState extends State<FEGCInterPage>
                                         ],
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: size.width / 75),
+                                        padding: EdgeInsets.symmetric(horizontal: size.width / 75),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.end,
+                                          crossAxisAlignment: CrossAxisAlignment.end,
                                           children: <Widget>[
                                             SizedBox(
                                               height: 8,
@@ -208,13 +178,8 @@ class _FEGCInterPageState extends State<FEGCInterPage>
                                             widget.isVisiting
                                                 ? Text(
                                                     "№:  ${widget.id}",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize:
-                                                            size.width / 32,
-                                                        color:
-                                                            Color(0xFF000043)),
+                                                    style:
+                                                        TextStyle(fontWeight: FontWeight.bold, fontSize: size.width / 32, color: Color(0xFF000043)),
                                                   )
                                                 : Container(),
                                             SizedBox(
@@ -230,91 +195,57 @@ class _FEGCInterPageState extends State<FEGCInterPage>
                                         height: 8,
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(
-                                            left: size.width / 25),
+                                        padding: EdgeInsets.only(left: size.width / 25),
                                         child: Text(
                                           "Renseignements cliniques",
                                           textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: size.width / 27.5,
-                                              color: Color(0xFF000043)),
+                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: size.width / 27.5, color: Color(0xFF000043)),
                                         ),
                                       ),
                                       SizedBox(
                                         height: size.width / 32,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: <Widget>[
                                           Text(
                                             "Age:    ",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: size.width / 37.5,
-                                                color: Color(0xFF000043)),
+                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: size.width / 37.5, color: Color(0xFF000043)),
                                           ),
                                           Container(
                                             width: 60,
                                             height: 28,
                                             child: TextField(
                                               enabled: widget.etat < 3,
-                                              keyboardType: TextInputType
-                                                  .numberWithOptions(
-                                                      decimal: true),
+                                              keyboardType: TextInputType.numberWithOptions(decimal: true),
                                               style: TextStyle(fontSize: 12),
                                               maxLength: 3,
                                               controller: ageC,
                                               decoration: InputDecoration(
                                                   counterText: '',
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          width: 1,
-                                                          color: Color(
-                                                              0xFF000043)))),
+                                                  border: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Color(0xFF000043)))),
                                             ),
                                           ),
                                           Text("  ans",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: size.width / 37.5,
-                                                  color: Color(0xFF000043))),
+                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: size.width / 37.5, color: Color(0xFF000043))),
                                           SizedBox(width: size.width / 10),
                                           Text("Sexe:    ",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: size.width / 37.5,
-                                                  color: Color(0xFF000043))),
+                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: size.width / 37.5, color: Color(0xFF000043))),
                                           widget.etat >= 3
                                               ? Text("$_sexe",
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize:
-                                                          size.width / 37.5,
-                                                      color: Color(0xFF000043)))
+                                                  style:
+                                                      TextStyle(fontWeight: FontWeight.bold, fontSize: size.width / 37.5, color: Color(0xFF000043)))
                                               : DropdownButton<String>(
                                                   value: _sexe,
                                                   elevation: 16,
-                                                  style: TextStyle(
-                                                      color: Color(0xFF000043),
-                                                      fontSize:
-                                                          size.width / 37.5),
+                                                  style: TextStyle(color: Color(0xFF000043), fontSize: size.width / 37.5),
                                                   onChanged: (String newValue) {
                                                     setState(() {
                                                       _sexe = newValue;
                                                     });
                                                   },
-                                                  items: <String>[
-                                                    'Masculin',
-                                                    'Féminin'
-                                                  ].map<
-                                                          DropdownMenuItem<
-                                                              String>>(
-                                                      (String value) {
-                                                    return DropdownMenuItem<
-                                                        String>(
+                                                  items: <String>['Masculin', 'Féminin'].map<DropdownMenuItem<String>>((String value) {
+                                                    return DropdownMenuItem<String>(
                                                       value: value,
                                                       child: Text(value),
                                                     );
@@ -329,77 +260,45 @@ class _FEGCInterPageState extends State<FEGCInterPage>
                                       Row(
                                           //mainAxisAlignment: MainAxisAlignment.center,
                                           //mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: <Widget>[
                                             SizedBox(
                                               width: size.width / 20,
                                             ),
                                             Text("Constants: ",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 18,
-                                                    color: Color(0xFF000043))),
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Color(0xFF000043))),
                                             Expanded(
                                               child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: <Widget>[
                                                   SizedBox(height: 20),
                                                   Row(
                                                     children: <Widget>[
                                                       Text(
                                                         "T°:   ",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 12,
-                                                            color: Color(
-                                                                0xFF000043)),
+                                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color(0xFF000043)),
                                                       ),
                                                       Container(
                                                         width: 138,
                                                         height: 32,
                                                         child: TextField(
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .numberWithOptions(
-                                                                      decimal:
-                                                                          true),
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                                          style: TextStyle(fontSize: 12),
                                                           controller: tempC,
-                                                          enabled:
-                                                              widget.etat < 3,
+                                                          enabled: widget.etat < 3,
                                                           maxLength: 4,
                                                           maxLines: 1,
-                                                          textAlign:
-                                                              TextAlign.right,
+                                                          textAlign: TextAlign.right,
                                                           decoration: InputDecoration(
                                                               counterText: '',
-                                                              contentPadding:
-                                                                  EdgeInsets.only(
-                                                                      bottom:
-                                                                          14,
-                                                                      right: 4),
-                                                              border: UnderlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                          width:
-                                                                              1,
-                                                                          color:
-                                                                              Color(0xFF000043)))),
+                                                              contentPadding: EdgeInsets.only(bottom: 14, right: 4),
+                                                              border:
+                                                                  UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Color(0xFF000043)))),
                                                         ),
                                                       ),
                                                       Text(
                                                         "°C",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            fontSize: 12,
-                                                            color: Color(
-                                                                0xFF000043)),
+                                                        style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12, color: Color(0xFF000043)),
                                                       ),
                                                     ],
                                                   ),
@@ -408,95 +307,51 @@ class _FEGCInterPageState extends State<FEGCInterPage>
                                                     children: <Widget>[
                                                       Text(
                                                         "TA:  ",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 12,
-                                                            color: Color(
-                                                                0xFF000043)),
+                                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color(0xFF000043)),
                                                       ),
                                                       Container(
                                                         width: 64,
                                                         height: 32,
                                                         child: TextField(
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          keyboardType: TextInputType.number,
+                                                          style: TextStyle(fontSize: 12),
                                                           controller: ta1C,
-                                                          enabled:
-                                                              widget.etat < 3,
+                                                          enabled: widget.etat < 3,
                                                           maxLength: 3,
-                                                          textAlign:
-                                                              TextAlign.right,
+                                                          textAlign: TextAlign.right,
                                                           maxLines: 1,
                                                           decoration: InputDecoration(
                                                               counterText: '',
-                                                              contentPadding:
-                                                                  EdgeInsets.only(
-                                                                      bottom:
-                                                                          14,
-                                                                      right: 4),
-                                                              border: UnderlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                          width:
-                                                                              1,
-                                                                          color:
-                                                                              Color(0xFF000043)))),
+                                                              contentPadding: EdgeInsets.only(bottom: 14, right: 4),
+                                                              border:
+                                                                  UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Color(0xFF000043)))),
                                                         ),
                                                       ),
                                                       Text(
                                                         " / ",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 12,
-                                                            color: Color(
-                                                                0xFF000043)),
+                                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color(0xFF000043)),
                                                       ),
                                                       Container(
                                                         width: 64,
                                                         height: 32,
                                                         child: TextField(
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          keyboardType: TextInputType.number,
+                                                          style: TextStyle(fontSize: 12),
                                                           controller: ta2C,
-                                                          enabled:
-                                                              widget.etat < 3,
+                                                          enabled: widget.etat < 3,
                                                           maxLength: 3,
                                                           maxLines: 1,
-                                                          textAlign:
-                                                              TextAlign.right,
+                                                          textAlign: TextAlign.right,
                                                           decoration: InputDecoration(
                                                               counterText: '',
-                                                              contentPadding:
-                                                                  EdgeInsets.only(
-                                                                      bottom:
-                                                                          14,
-                                                                      right: 4),
-                                                              border: UnderlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                          width:
-                                                                              1,
-                                                                          color:
-                                                                              Color(0xFF000043)))),
+                                                              contentPadding: EdgeInsets.only(bottom: 14, right: 4),
+                                                              border:
+                                                                  UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Color(0xFF000043)))),
                                                         ),
                                                       ),
                                                       Text(
                                                         "mmHg",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            fontSize: 12,
-                                                            color: Color(
-                                                                0xFF000043)),
+                                                        style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12, color: Color(0xFF000043)),
                                                       ),
                                                     ],
                                                   ),
@@ -505,56 +360,29 @@ class _FEGCInterPageState extends State<FEGCInterPage>
                                                     children: <Widget>[
                                                       Text(
                                                         "Poids:  ",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 12,
-                                                            color: Color(
-                                                                0xFF000043)),
+                                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Color(0xFF000043)),
                                                       ),
                                                       Container(
                                                         width: 128,
                                                         height: 32,
                                                         child: TextField(
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .numberWithOptions(
-                                                                      decimal:
-                                                                          true),
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                          keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                                          style: TextStyle(fontSize: 12),
                                                           controller: poidsC,
-                                                          enabled:
-                                                              widget.etat < 3,
+                                                          enabled: widget.etat < 3,
                                                           maxLength: 4,
                                                           maxLines: 1,
-                                                          textAlign:
-                                                              TextAlign.right,
+                                                          textAlign: TextAlign.right,
                                                           decoration: InputDecoration(
                                                               counterText: '',
-                                                              contentPadding:
-                                                                  EdgeInsets.only(
-                                                                      bottom:
-                                                                          14,
-                                                                      right: 4),
-                                                              border: UnderlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide(
-                                                                          width:
-                                                                              1,
-                                                                          color:
-                                                                              Color(0xFF000043)))),
+                                                              contentPadding: EdgeInsets.only(bottom: 14, right: 4),
+                                                              border:
+                                                                  UnderlineInputBorder(borderSide: BorderSide(width: 1, color: Color(0xFF000043)))),
                                                         ),
                                                       ),
                                                       Text(
                                                         "Kg",
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .normal,
-                                                            fontSize: 12,
-                                                            color: Color(
-                                                                0xFF000043)),
+                                                        style: TextStyle(fontWeight: FontWeight.normal, fontSize: 12, color: Color(0xFF000043)),
                                                       ),
                                                     ],
                                                   ),
@@ -567,21 +395,13 @@ class _FEGCInterPageState extends State<FEGCInterPage>
                                       // end ttp
                                       //ATCD
                                       Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: <Widget>[
                                           Padding(
-                                            padding: EdgeInsets.only(
-                                                top: size.width / 45,
-                                                bottom: 4,
-                                                left: size.width / 25),
-                                            child: Text("ATCD:",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 15,
-                                                    color: Color(0xFF000043))),
+                                            padding: EdgeInsets.only(top: size.width / 45, bottom: 4, left: size.width / 25),
+                                            child:
+                                                Text("ATCD:", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Color(0xFF000043))),
                                           ),
                                         ],
                                       ),
@@ -598,15 +418,8 @@ class _FEGCInterPageState extends State<FEGCInterPage>
                                               maxLines: 5,
                                               enabled: widget.etat < 3,
                                               decoration: InputDecoration(
-                                                  contentPadding:
-                                                      EdgeInsets.symmetric(
-                                                          horizontal: 8,
-                                                          vertical: 4),
-                                                  border: OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          width: 1,
-                                                          color: Color(
-                                                              0xFF000043)))),
+                                                  contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                                  border: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Color(0xFF000043)))),
                                             ),
                                           ),
                                         ],
@@ -614,797 +427,372 @@ class _FEGCInterPageState extends State<FEGCInterPage>
                                       SizedBox(height: 20),
                                       //end
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: <Widget>[
                                           Container(
                                               width: 60,
                                               child: Text(
                                                 "FRCV: ",
                                                 textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16,
-                                                    color: Color(0xFF000043)),
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF000043)),
                                               )),
                                           Container(
                                               width: size.width - 60,
-                                              child: Wrap(
-                                                  direction: Axis.horizontal,
-                                                  spacing: size.width / 50,
+                                              child: Wrap(direction: Axis.horizontal, spacing: size.width / 50, children: <Widget>[
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.min,
                                                   children: <Widget>[
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: <Widget>[
-                                                        SizedBox(
-                                                          width: 32,
-                                                          height: 32,
-                                                          child: Checkbox(
-                                                            value: frcv[0],
-                                                            onChanged:
-                                                                (bool a) {
-                                                              if (widget.etat >=
-                                                                  3) return;
-                                                              setState(() {
-                                                                frcv[0] = a;
-                                                              });
-                                                            },
-                                                          ),
-                                                        ),
-                                                        Text("HTA",
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                color: Color(
-                                                                    0xFF000043))),
-                                                      ],
+                                                    SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: CustomCheckBox(
+                                                        onChanged: (value) {
+                                                          frcv[0] = value;
+                                                        },
+                                                        etat: widget.etat,
+                                                        value: frcv[0],
+                                                      ),
                                                     ),
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: <Widget>[
-                                                        SizedBox(
-                                                          width: 32,
-                                                          height: 32,
-                                                          child: Checkbox(
-                                                            value: frcv[1],
-                                                            onChanged:
-                                                                (bool a) {
-                                                              if (widget.etat >=
-                                                                  3) return;
-                                                              setState(() {
-                                                                frcv[1] = a;
-                                                              });
-                                                            },
-                                                          ),
-                                                        ),
-                                                        Text("Diabète",
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                color: Color(
-                                                                    0xFF000043))),
-                                                      ],
+                                                    Text("HTA", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: CustomCheckBox(
+                                                        onChanged: (value) {
+                                                          frcv[1] = value;
+                                                        },
+                                                        etat: widget.etat,
+                                                        value: frcv[1],
+                                                      ),
                                                     ),
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: <Widget>[
-                                                        SizedBox(
-                                                          width: 32,
-                                                          height: 32,
-                                                          child: Checkbox(
-                                                            value: frcv[2],
-                                                            onChanged:
-                                                                (bool a) {
-                                                              if (widget.etat >=
-                                                                  3) return;
-                                                              setState(() {
-                                                                frcv[2] = a;
-                                                              });
-                                                            },
-                                                          ),
-                                                        ),
-                                                        Text("Tabac",
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                color: Color(
-                                                                    0xFF000043))),
-                                                      ],
+                                                    Text("Diabète", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: CustomCheckBox(
+                                                        onChanged: (value) {
+                                                          frcv[2] = value;
+                                                        },
+                                                        etat: widget.etat,
+                                                        value: frcv[2],
+                                                      ),
                                                     ),
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: <Widget>[
-                                                        SizedBox(
-                                                          width: 32,
-                                                          height: 32,
-                                                          child: Checkbox(
-                                                            value: frcv[3],
-                                                            onChanged:
-                                                                (bool a) {
-                                                              if (widget.etat >=
-                                                                  3) return;
-                                                              setState(() {
-                                                                frcv[3] = a;
-                                                              });
-                                                            },
-                                                          ),
-                                                        ),
-                                                        Text("Obésité",
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                color: Color(
-                                                                    0xFF000043))),
-                                                      ],
+                                                    Text("Tabac", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: CustomCheckBox(
+                                                        onChanged: (value) {
+                                                          frcv[3] = value;
+                                                        },
+                                                        etat: widget.etat,
+                                                        value: frcv[3],
+                                                      ),
                                                     ),
-                                                    Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      children: <Widget>[
-                                                        SizedBox(
-                                                          width: 32,
-                                                          height: 32,
-                                                          child: Checkbox(
-                                                            value: frcv[4],
-                                                            onChanged:
-                                                                (bool a) {
-                                                              if (widget.etat >=
-                                                                  3) return;
-                                                              setState(() {
-                                                                frcv[4] = a;
-                                                              });
-                                                            },
-                                                          ),
-                                                        ),
-                                                        Text("Dyslipidémie",
-                                                            style: TextStyle(
-                                                                fontSize: 16,
-                                                                color: Color(
-                                                                    0xFF000043))),
-                                                      ],
+                                                    Text("Obésité", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: CustomCheckBox(
+                                                        onChanged: (value) {
+                                                          frcv[4] = value;
+                                                        },
+                                                        etat: widget.etat,
+                                                        value: frcv[4],
+                                                      ),
                                                     ),
-                                                  ])),
+                                                    Text("Dyslipidémie", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                                  ],
+                                                ),
+                                              ])),
                                         ],
                                       ),
                                       SizedBox(height: 18),
                                       Text(
                                         "  Motifs de consultation: ",
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16,
-                                            color: Color(0xFF000043)),
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF000043)),
                                       ),
-                                      Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                      Row(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.start, children: <
+                                          Widget>[
+                                        Container(
+                                          width: 60,
+                                          //                              child: Text("Motifs de consultation: ", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF000043)),)
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.max,
                                           children: <Widget>[
+                                            Text("  Dyspnée", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF000043))),
+                                            DyspneCheckList(
+                                              size: size,
+                                              dyspne: dyspne,
+                                              etat: widget.etat,
+                                              onChanged: (values) {
+                                                dyspne = values;
+                                              },
+                                            ),
+                                            SizedBox(height: 12),
+                                            Text("  Douleur", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF000043))),
                                             Container(
-                                              width: 60,
-                                              //                              child: Text("Motifs de consultation: ", textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF000043)),)
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Text("  Dyspnée",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                        color:
-                                                            Color(0xFF000043))),
-                                                Container(
-                                                  width: size.width - 60,
-                                                  child: Wrap(
-                                                    direction: Axis.horizontal,
-                                                    spacing: size.width / 50,
-                                                    children: <Widget>[
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: <Widget>[
-                                                          SizedBox(
-                                                            width: 32,
-                                                            height: 32,
-                                                            child: Checkbox(
-                                                              value: dyspne[0],
-                                                              onChanged:
-                                                                  (bool a) {
-                                                                if (widget
-                                                                        .etat >=
-                                                                    3) return;
-                                                                if (a) {
-                                                                  for (int d =
-                                                                          0;
-                                                                      d < 4;
-                                                                      d++) {
-                                                                    dyspne[d] =
-                                                                        false;
-                                                                  }
-                                                                  dyspne[0] =
-                                                                      true;
-                                                                  setState(
-                                                                      () {});
-                                                                  return;
-                                                                }
-                                                                dyspne[0] =
-                                                                    false;
-                                                                setState(() {});
-                                                              },
-                                                            ),
-                                                          ),
-                                                          Text("Stade 1",
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  color: Color(
-                                                                      0xFF000043))),
-                                                        ],
+                                              width: size.width - 60,
+                                              child: Wrap(direction: Axis.horizontal, spacing: size.width / 50, children: <Widget>[
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: CustomCheckBox(
+                                                        value: douleur[0],
+                                                        etat: widget.etat,
+                                                        onChanged: (bool a) {
+                                                          douleur[0] = a;
+                                                        },
                                                       ),
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: <Widget>[
-                                                          SizedBox(
-                                                            width: 32,
-                                                            height: 32,
-                                                            child: Checkbox(
-                                                              value: dyspne[1],
-                                                              onChanged:
-                                                                  (bool a) {
-                                                                if (widget
-                                                                        .etat >=
-                                                                    3) return;
-                                                                if (a) {
-                                                                  for (int d =
-                                                                          0;
-                                                                      d < 4;
-                                                                      d++) {
-                                                                    dyspne[d] =
-                                                                        false;
-                                                                  }
-                                                                  dyspne[1] =
-                                                                      true;
-                                                                  setState(
-                                                                      () {});
-                                                                  return;
-                                                                }
-                                                                dyspne[1] =
-                                                                    false;
-                                                                setState(() {});
-                                                              },
-                                                            ),
-                                                          ),
-                                                          Text("Stade 2",
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  color: Color(
-                                                                      0xFF000043))),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: <Widget>[
-                                                          SizedBox(
-                                                            width: 32,
-                                                            height: 32,
-                                                            child: Checkbox(
-                                                              value: dyspne[2],
-                                                              onChanged:
-                                                                  (bool a) {
-                                                                if (widget
-                                                                        .etat >=
-                                                                    3) return;
-                                                                if (a) {
-                                                                  for (int d =
-                                                                          0;
-                                                                      d < 4;
-                                                                      d++) {
-                                                                    dyspne[d] =
-                                                                        false;
-                                                                  }
-                                                                  dyspne[2] =
-                                                                      true;
-                                                                  setState(
-                                                                      () {});
-                                                                  return;
-                                                                }
-                                                                dyspne[2] =
-                                                                    false;
-                                                                setState(() {});
-                                                              },
-                                                            ),
-                                                          ),
-                                                          Text("Stade 3",
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  color: Color(
-                                                                      0xFF000043))),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: <Widget>[
-                                                          SizedBox(
-                                                            width: 32,
-                                                            height: 32,
-                                                            child: Checkbox(
-                                                              value: dyspne[3],
-                                                              onChanged:
-                                                                  (bool a) {
-                                                                if (widget
-                                                                        .etat >=
-                                                                    3) return;
-                                                                if (a) {
-                                                                  for (int d =
-                                                                          0;
-                                                                      d < 4;
-                                                                      d++) {
-                                                                    dyspne[d] =
-                                                                        false;
-                                                                  }
-                                                                  dyspne[3] =
-                                                                      true;
-                                                                  setState(
-                                                                      () {});
-                                                                  return;
-                                                                }
-                                                                dyspne[3] =
-                                                                    false;
-                                                                setState(() {});
-                                                              },
-                                                            ),
-                                                          ),
-                                                          Text("Stade 4",
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  color: Color(
-                                                                      0xFF000043))),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    Text("Rétro Stérnal", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                                  ],
                                                 ),
-                                                SizedBox(height: 12),
-                                                Text("  Douleur",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                        color:
-                                                            Color(0xFF000043))),
-                                                Container(
-                                                  width: size.width - 60,
-                                                  child: Wrap(
-                                                      direction:
-                                                          Axis.horizontal,
-                                                      spacing: size.width / 50,
-                                                      children: <Widget>[
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: <Widget>[
-                                                            SizedBox(
-                                                              width: 32,
-                                                              height: 32,
-                                                              child: Checkbox(
-                                                                value:
-                                                                    douleur[0],
-                                                                onChanged:
-                                                                    (bool a) {
-                                                                  if (widget
-                                                                          .etat >=
-                                                                      3) return;
-                                                                  setState(() {
-                                                                    douleur[0] =
-                                                                        a;
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                                "Rétro Stérnal",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    color: Color(
-                                                                        0xFF000043))),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: <Widget>[
-                                                            SizedBox(
-                                                              width: 32,
-                                                              height: 32,
-                                                              child: Checkbox(
-                                                                value:
-                                                                    douleur[1],
-                                                                onChanged:
-                                                                    (bool a) {
-                                                                  if (widget
-                                                                          .etat >=
-                                                                      3) return;
-                                                                  setState(() {
-                                                                    douleur[1] =
-                                                                        a;
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                                "basi-thoracique",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    color: Color(
-                                                                        0xFF000043))),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: <Widget>[
-                                                            SizedBox(
-                                                              width: 32,
-                                                              height: 32,
-                                                              child: Checkbox(
-                                                                value:
-                                                                    douleur[2],
-                                                                onChanged:
-                                                                    (bool a) {
-                                                                  if (widget
-                                                                          .etat >=
-                                                                      3) return;
-                                                                  setState(() {
-                                                                    douleur[2] =
-                                                                        a;
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                                "Hépatalgie d\'effort",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    color: Color(
-                                                                        0xFF000043))),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: <Widget>[
-                                                            SizedBox(
-                                                              width: 32,
-                                                              height: 32,
-                                                              child: Checkbox(
-                                                                value:
-                                                                    douleur[3],
-                                                                onChanged:
-                                                                    (bool a) {
-                                                                  if (widget
-                                                                          .etat >=
-                                                                      3) return;
-                                                                  setState(() {
-                                                                    douleur[3] =
-                                                                        a;
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                                "Médio-thoracique",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    color: Color(
-                                                                        0xFF000043))),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: <Widget>[
-                                                            SizedBox(
-                                                              width: 32,
-                                                              height: 32,
-                                                              child: Checkbox(
-                                                                value:
-                                                                    douleur[4],
-                                                                onChanged:
-                                                                    (bool a) {
-                                                                  if (widget
-                                                                          .etat >=
-                                                                      3) return;
-                                                                  setState(() {
-                                                                    douleur[4] =
-                                                                        a;
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Text("Atypique",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        16,
-                                                                    color: Color(
-                                                                        0xFF000043))),
-                                                          ],
-                                                        ),
-                                                      ]),
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: CustomCheckBox(
+                                                        value: douleur[1],
+                                                        etat: widget.etat,
+                                                        onChanged: (bool a) {
+                                                          douleur[1] = a;
+                                                        },
+                                                      ),
+                                                    ),
+                                                    Text("basi-thoracique", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                                  ],
                                                 ),
-                                                SizedBox(height: 12),
-                                                Text("  Palpitation",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                        color:
-                                                            Color(0xFF000043))),
                                                 Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        width: 32,
-                                                        height: 32,
-                                                        child: Checkbox(
-                                                          value: palpit,
-                                                          onChanged: (bool a) {
-                                                            if (widget.etat >=
-                                                                3) return;
-                                                            setState(() {
-                                                              palpit = a;
-                                                            });
-                                                          },
-                                                        ),
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: CustomCheckBox(
+                                                        value: douleur[2],
+                                                        etat: widget.etat,
+                                                        onChanged: (bool a) {
+                                                          douleur[2] = a;
+                                                        },
                                                       ),
-                                                      Text("Oui",
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              color: Color(
-                                                                  0xFF000043))),
-                                                      SizedBox(
-                                                          width:
-                                                              size.width / 25),
-                                                      SizedBox(
-                                                        width: 32,
-                                                        height: 32,
-                                                        child: Checkbox(
-                                                          value: !palpit,
-                                                          onChanged: (bool a) {
-                                                            if (widget.etat >=
-                                                                3) return;
-                                                            setState(() {
-                                                              palpit = !a;
-                                                            });
-                                                          },
-                                                        ),
-                                                      ),
-                                                      Text("Non",
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              color: Color(
-                                                                  0xFF000043))),
-                                                      SizedBox(
-                                                          width:
-                                                              size.width / 30),
-                                                    ]),
-                                                SizedBox(height: 12),
-                                                Text("  Syncope ou lipothymie",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                        color:
-                                                            Color(0xFF000043))),
+                                                    ),
+                                                    Text("Hépatalgie d\'effort", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                                  ],
+                                                ),
                                                 Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        width: 32,
-                                                        height: 32,
-                                                        child: Checkbox(
-                                                          value: synclin,
-                                                          onChanged: (bool a) {
-                                                            if (widget.etat >=
-                                                                3) return;
-                                                            setState(() {
-                                                              synclin = a;
-                                                            });
-                                                          },
-                                                        ),
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: CustomCheckBox(
+                                                        value: douleur[3],
+                                                        etat: widget.etat,
+                                                        onChanged: (bool a) {
+                                                          douleur[3] = a;
+                                                        },
                                                       ),
-                                                      Text("Oui",
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              color: Color(
-                                                                  0xFF000043))),
-                                                      SizedBox(
-                                                          width:
-                                                              size.width / 25),
-                                                      SizedBox(
-                                                        width: 32,
-                                                        height: 32,
-                                                        child: Checkbox(
-                                                          value: !synclin,
-                                                          onChanged: (bool a) {
-                                                            if (widget.etat >=
-                                                                3) return;
-                                                            setState(() {
-                                                              synclin = !a;
-                                                            });
-                                                          },
-                                                        ),
-                                                      ),
-                                                      Text("Non",
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              color: Color(
-                                                                  0xFF000043))),
-                                                      SizedBox(
-                                                          width:
-                                                              size.width / 30),
-                                                    ]),
-                                                SizedBox(height: 12),
-                                                Text(
-                                                    "  Odèmes des membres inférieurs",
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                        color:
-                                                            Color(0xFF000043))),
+                                                    ),
+                                                    Text("Médio-thoracique", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                                  ],
+                                                ),
                                                 Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: <Widget>[
-                                                      SizedBox(
-                                                        width: 32,
-                                                        height: 32,
-                                                        child: Checkbox(
-                                                          value: oedmeminf,
-                                                          onChanged: (bool a) {
-                                                            if (widget.etat >=
-                                                                3) return;
-                                                            setState(() {
-                                                              oedmeminf = a;
-                                                            });
-                                                          },
-                                                        ),
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: CustomCheckBox(
+                                                        value: douleur[4],
+                                                        etat: widget.etat,
+                                                        onChanged: (bool a) {
+                                                          douleur[4] = a;
+                                                        },
                                                       ),
-                                                      Text("Oui",
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              color: Color(
-                                                                  0xFF000043))),
-                                                      SizedBox(
-                                                          width:
-                                                              size.width / 25),
-                                                      SizedBox(
-                                                        width: 32,
-                                                        height: 32,
-                                                        child: Checkbox(
-                                                          value: !oedmeminf,
-                                                          onChanged: (bool a) {
-                                                            if (widget.etat >=
-                                                                3) return;
-                                                            setState(() {
-                                                              oedmeminf = !a;
-                                                            });
-                                                          },
-                                                        ),
-                                                      ),
-                                                      Text("Non",
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              color: Color(
-                                                                  0xFF000043))),
-                                                      SizedBox(
-                                                          width:
-                                                              size.width / 30),
-                                                    ]),
-                                              ],
+                                                    ),
+                                                    Text("Atypique", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                                  ],
+                                                ),
+                                              ]),
                                             ),
-                                          ]),
+                                            SizedBox(height: 12),
+                                            Text("  Palpitation",
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF000043))),
+                                            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                                              SizedBox(
+                                                width: 32,
+                                                height: 32,
+                                                child: CustomCheckBox(
+                                                  value: palpit,
+                                                  etat: widget.etat,
+                                                  onChanged: (bool a) {
+                                                    palpit = a;
+                                                  },
+                                                ),
+                                              ),
+                                              Text("Oui", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                              SizedBox(width: size.width / 25),
+                                              SizedBox(
+                                                width: 32,
+                                                height: 32,
+                                                child: CustomCheckBox(
+                                                  value: !palpit,
+                                                  etat: widget.etat,
+                                                  onChanged: (bool a) {
+                                                    palpit = !a;
+                                                  },
+                                                ),
+                                              ),
+                                              Text("Non", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                              SizedBox(width: size.width / 30),
+                                            ]),
+                                            SizedBox(height: 12),
+                                            Text("  Syncope ou lipothymie",
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF000043))),
+                                            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                                              SizedBox(
+                                                width: 32,
+                                                height: 32,
+                                                child: CustomCheckBox(
+                                                  value: synclin,
+                                                  etat: widget.etat,
+                                                  onChanged: (bool a) {
+                                                    synclin = a;
+                                                  },
+                                                ),
+                                              ),
+                                              Text("Oui", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                              SizedBox(width: size.width / 25),
+                                              SizedBox(
+                                                width: 32,
+                                                height: 32,
+                                                child: CustomCheckBox(
+                                                  value: !synclin,
+                                                  etat: widget.etat,
+                                                  onChanged: (bool a) {
+                                                    synclin = !a;
+                                                  },
+                                                ),
+                                              ),
+                                              Text("Non", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                              SizedBox(width: size.width / 30),
+                                            ]),
+                                            SizedBox(height: 12),
+                                            Text("  Odèmes des membres inférieurs",
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF000043))),
+                                            Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                                              SizedBox(
+                                                width: 32,
+                                                height: 32,
+                                                child: CustomCheckBox(
+                                                  value: oedmeminf,
+                                                  etat: widget.etat,
+                                                  onChanged: (bool a) {
+                                                    oedmeminf = a;
+                                                  },
+                                                ),
+                                              ),
+                                              Text("Oui", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                              SizedBox(width: size.width / 25),
+                                              SizedBox(
+                                                width: 32,
+                                                height: 32,
+                                                child: CustomCheckBox(
+                                                  value: !oedmeminf,
+                                                  etat: widget.etat,
+                                                  onChanged: (bool a) {
+                                                    oedmeminf = !a;
+                                                  },
+                                                ),
+                                              ),
+                                              Text("Non", style: TextStyle(fontSize: 16, color: Color(0xFF000043))),
+                                              SizedBox(width: size.width / 30),
+                                            ]),
+                                          ],
+                                        ),
+                                      ]),
                                       Padding(
-                                        padding: EdgeInsets.only(
-                                            top: size.width / 25,
-                                            left: size.width / 20),
+                                        padding: EdgeInsets.only(top: size.width / 25, left: size.width / 20),
                                         child: Text("Résumé Syndromique:",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20,
-                                                color: Color(0xFF000043))),
+                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Color(0xFF000043))),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(
-                                            left: size.width / 20,
-                                            right: size.width / 20),
+                                        padding: EdgeInsets.only(left: size.width / 20, right: size.width / 20),
                                         child: TextField(
                                           minLines: 3,
                                           maxLines: 10,
                                           style: TextStyle(fontSize: 16),
                                           enabled: widget.etat < 3,
                                           controller: resumeC,
-                                          decoration: InputDecoration(
-                                              border: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1,
-                                                      color:
-                                                          Color(0xFF000043)))),
+                                          decoration:
+                                              InputDecoration(border: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Color(0xFF000043)))),
                                         ),
                                       ),
                                       SizedBox(height: size.width / 30),
                                       Padding(
-                                        padding: EdgeInsets.only(
-                                            top: size.width / 25,
-                                            left: size.width / 20),
+                                        padding: EdgeInsets.only(top: size.width / 25, left: size.width / 20),
                                         child: RichText(
                                             text: TextSpan(
                                                 text: "Objets",
                                                 children: [
                                                   TextSpan(
                                                       text: " (vos questions)",
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                          fontSize: 14,
-                                                          color: Color(
-                                                              0xFF000043)))
+                                                      style: TextStyle(fontWeight: FontWeight.normal, fontSize: 14, color: Color(0xFF000043)))
                                                 ],
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14,
-                                                    color: Color(0xFF000043)))),
+                                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFF000043)))),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(
-                                            left: size.width / 20,
-                                            right: size.width / 20),
+                                        padding: EdgeInsets.only(left: size.width / 20, right: size.width / 20),
                                         child: TextField(
                                           minLines: 1,
                                           maxLines: 999,
                                           style: TextStyle(fontSize: 16),
                                           enabled: widget.etat < 3,
                                           controller: commentaireC,
-                                          decoration: InputDecoration(
-                                              border: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      width: 1,
-                                                      color:
-                                                          Color(0xFF000043)))),
+                                          decoration:
+                                              InputDecoration(border: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Color(0xFF000043)))),
                                         ),
                                       ),
                                       SizedBox(height: size.width / 40),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: <Widget>[
                                           Text(
                                               widget.isVisiting
-                                                  ? widget.photoconsultations
-                                                              .toString() ==
-                                                          "[]"
+                                                  ? widget.photoconsultations.toString() == "[]"
                                                       ? ""
                                                       : "Les Images:"
                                                   : "Joindre des Images:",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: size.width / 25,
-                                                  color: Color(0xFF000043))),
+                                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: size.width / 25, color: Color(0xFF000043))),
                                         ],
                                       ),
                                       SizedBox(height: size.width / 20),
